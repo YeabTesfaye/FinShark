@@ -25,10 +25,11 @@ public class StockRepository : IStockRepository
 
     public async Task<Stock?> DeleteAsync(int id)
     {
-        var stock = await _contex.Stocks.FirstOrDefaultAsync(x => x.StockId == id);
+        var stock = await _contex.Stocks.Include(c => c.Comments).FirstOrDefaultAsync(x => x.StockId == id);
         if(stock is null){
             return null;
         }
+        _contex.Comments.RemoveRange(stock.Comments);
         _contex.Stocks.Remove(stock);
        await _contex.SaveChangesAsync();
         return stock;
