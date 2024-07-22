@@ -5,6 +5,7 @@ using api.models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using utils;
 
 namespace api.repositories;
 
@@ -35,9 +36,16 @@ public class StockRepository : IStockRepository
         return stock;
     }
 
-    public Task<List<Stock>> GetAllAsync()
+    public async Task<List<Stock>> GetAllAsync(QueryObject query)
     {
-        return _contex.Stocks.Include(c => c.Comments).ToListAsync();
+        var stocks =  _contex.Stocks.Include(c => c.Comments).AsQueryable();
+        if(!string.IsNullOrWhiteSpace(query.CompanyName)){
+           stocks = stocks.Where(s => s.CompanyName != null && s.CompanyName.Contains(query.CompanyName));
+        }
+        if(!string.IsNullOrWhiteSpace(query.Symbol)){
+        stocks = stocks.Where(s => s.Symbol != null && s.Symbol.Contains(query.Symbol));
+        }
+        return await stocks.ToListAsync();
     }
 
     public Task<Stock?> GetByIdAsync(int id)

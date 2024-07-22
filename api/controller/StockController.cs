@@ -3,6 +3,7 @@ using api.Dtos.Stock;
 using api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using utils;
 
 namespace api.controller;
 
@@ -18,9 +19,9 @@ public class StockController : ControllerBase
     }
 
 [HttpGet]
-public async Task<IActionResult> GetStocks()
-{
-        var stocks = await _stockRepo.GetAllAsync();
+public async Task<IActionResult> GetStocks([FromQuery] QueryObject query)
+{     
+        var stocks = await _stockRepo.GetAllAsync(query);
         //Select projection happens after the database call
        var stockDto =   stocks.Select(s => s.ToStockDto());
         return Ok(stockDto);
