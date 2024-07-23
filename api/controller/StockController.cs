@@ -1,6 +1,7 @@
 using api.Data;
 using api.Dtos.Stock;
 using api.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using utils;
@@ -8,7 +9,7 @@ using utils;
 namespace api.controller;
 
 [ApiController]
-[Route("/api/[controller]")]
+[Route("/api/stock")]
 public class StockController : ControllerBase 
 {
     private readonly IStockRepository _stockRepo;
@@ -19,6 +20,7 @@ public class StockController : ControllerBase
     }
 
 [HttpGet]
+[Authorize]
 public async Task<IActionResult> GetStocks([FromQuery] QueryObject query)
 {     
         var stocks = await _stockRepo.GetAllAsync(query);
