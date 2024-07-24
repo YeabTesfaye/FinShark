@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api.models;
-
+[Table("Stock")]
 public class Stock
 {
     public int StockId{ get; set; }
@@ -14,6 +14,7 @@ public class Stock
     public string?  Industry { get; set; }
     public long MarketCap { get; set; }
     public  List<Comment> Comments { get; set; } = [];
+    public List<Portfolio> Portfolios { get; set; }
 }
 
 // The `Stock` and `Comment` models interact through a one-to-many relationship
