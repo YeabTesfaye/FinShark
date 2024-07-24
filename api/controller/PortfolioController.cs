@@ -28,5 +28,27 @@ public class PortfolioController : ControllerBase
             var userPortfolio = await _protfolioRepo.GetUserPortfolio(appUser);
             return Ok(userPortfolio);
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddPortfolio(string symbol){
+        var username = User.GetUsername();
+        var appUser = await _userManager.FindByNameAsync(username);
+        var stock = await _stockRepo.GetBySymbolAsync(symbol);
+        if (stock is null) return BadRequest("Stock Not Found");
+        var userPortfolio = await _protfolioRepo.GetUserPortfolio(appUser);
+        if(userPortfolio.Any(e => e.Symbol.ToLower() == symbol.ToLower())) {
+            return BadRequest("Can not add same stock to portfolio");
+        }
+
+        var portfolioModel = new Portfolio
+        {
+            StockId = stock.StockId,
+            AppUserId = appUser.Id
+        };
+        await _protfolioRepo.CreateAsync(portfolioModel);
+        if (portfolioModel is null) return StatusCode(500);
+        else return Created();
+        }
         
     }

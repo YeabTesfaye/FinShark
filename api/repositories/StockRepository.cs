@@ -60,6 +60,11 @@ public class StockRepository : IStockRepository
         return _contex.Stocks.Include(c => c.Comments).FirstOrDefaultAsync(x => x.StockId == id);
     }
 
+    public async Task<Stock?> GetBySymbolAsync(string symbol)
+    {
+        return await _contex.Stocks.FirstOrDefaultAsync(s => s.Symbol == symbol);
+    }
+
     public Task<bool> StockExists(int id)
     {
         return _contex.Stocks.AnyAsync(s => s.StockId == id); 
