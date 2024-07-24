@@ -25,7 +25,7 @@ public async Task<IActionResult> GetStocks([FromQuery] QueryObject query)
 {     
         var stocks = await _stockRepo.GetAllAsync(query);
         //Select projection happens after the database call
-       var stockDto =   stocks.Select(s => s.ToStockDto());
+       var stockDto =   stocks.Select(s => s.ToStockDto()).ToList();
         return Ok(stockDto);
 }
 // select is the same as how map works in js

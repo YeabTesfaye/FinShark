@@ -15,12 +15,10 @@ public class PortfolioRepository : IPortfolioRepository
     }
     public async Task<Portfolio> DeletePortfolio(AppUser appUser, string symbol)
     {
-        var portfolioModel = await _context.Portfolios.FirstOrDefaultAsync(x => x.AppUserId == appUser.Id && x.Stock.Symbol.ToLower() == symbol.ToLower());
+        var portfolioModel = await _context.Portfolios.FirstOrDefaultAsync(x => x.AppUserId == appUser.Id 
+        && x.Stock.Symbol.ToLower() == symbol.ToLower());
 
-        if (portfolioModel == null)
-        {
-            return null;
-        }
+        if (portfolioModel is null) return null;
 
         _context.Portfolios.Remove(portfolioModel);
         await _context.SaveChangesAsync();

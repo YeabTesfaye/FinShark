@@ -50,5 +50,23 @@ public class PortfolioController : ControllerBase
         if (portfolioModel is null) return StatusCode(500);
         else return Created();
         }
-        
+
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> DeletePortfolio(string symbol){
+        var username = User.GetUsername();
+        var appUser = await _userManager.FindByNameAsync(username);
+
+        var userPortfolio = await _protfolioRepo.GetUserPortfolio(appUser);
+
+        var filteredStock = userPortfolio.Where(s => s.Symbol.ToLower() == symbol.ToLower()).ToList();
+
+        if(filteredStock.Count == 1){
+            await _protfolioRepo.DeletePortfolio(appUser, symbol);
+        }
+        else{
+            return BadRequest("Stock Not in your portofolio");
+        }
+        return NoContent();
+        }
     }
