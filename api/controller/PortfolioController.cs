@@ -46,6 +46,7 @@ public class PortfolioController : ControllerBase
             StockId = stock.StockId,
             AppUserId = appUser.Id
         };
+       
         await _protfolioRepo.CreateAsync(portfolioModel);
         if (portfolioModel is null) return StatusCode(500);
         else return Created();

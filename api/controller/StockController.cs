@@ -31,6 +31,7 @@ public async Task<IActionResult> GetStocks([FromQuery] QueryObject query)
 // select is the same as how map works in js
 
 [HttpGet("{id}")]
+[Authorize]
 public async Task<IActionResult> GetStockById([FromRoute] int id){
         var stock = await _stockRepo.GetByIdAsync(id);
         if(stock is null){
@@ -39,6 +40,7 @@ public async Task<IActionResult> GetStockById([FromRoute] int id){
         return Ok(stock.ToStockDto());
 }
 [HttpPost]
+[Authorize]
   public async Task<IActionResult> Create([FromBody] CreateStockRequest stockDto){
       if(!ModelState.IsValid){
             return BadRequest(ModelState);

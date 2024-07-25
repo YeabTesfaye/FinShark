@@ -40,7 +40,7 @@ public class CommentRepository : ICommentRepository
 
     public async Task<Comment?> GetByIdAsync(int id)
     {
-        var commnet = await _context.Comments.Include(a => a.AppUser).FirstOrDefaultAsync(c => c.StockId == id);
+        var commnet = await _context.Comments.Include(a => a.AppUser).FirstOrDefaultAsync(c => c.CommentId == id);
         return commnet;
     }
 
