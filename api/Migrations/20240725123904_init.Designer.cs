@@ -12,8 +12,8 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240724092519_commentOneToOne")]
-    partial class commentOneToOne
+    [Migration("20240725123904_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,13 +54,13 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9e5a212e-2df9-426b-aaa9-89f00a538c89",
+                            Id = "1cc2c7eb-d105-4531-b138-048cbfe30c5b",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "06edc444-c2d9-46f9-ace2-8d9acda0dcaf",
+                            Id = "29f42536-215a-4260-8303-fafc686b85a2",
                             Name = "User",
                             NormalizedName = "USER"
                         });

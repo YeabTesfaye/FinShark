@@ -65,6 +65,11 @@ public class StockRepository : IStockRepository
         return await _contex.Stocks.FirstOrDefaultAsync(s => s.Symbol == symbol);
     }
 
+    public async Task<Stock?> GetStockWithOwnerAsync(int stockId)
+    {
+        return await _contex.Stocks.FirstOrDefaultAsync(s => s.StockId == stockId);
+    }
+
     public Task<bool> StockExists(int id)
     {
         return _contex.Stocks.AnyAsync(s => s.StockId == id); 
