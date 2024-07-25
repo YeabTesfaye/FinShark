@@ -148,3 +148,5 @@ C:\Users\yeabiseraT\Desktop\Projects\Finshark\api\bin\Debug\net8.0\Microsoft.Asp
 C:\Users\yeabiseraT\Desktop\Projects\Finshark\api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\yeabiseraT\Desktop\Projects\Finshark\api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\yeabiseraT\Desktop\Projects\Finshark\api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\yeabiseraT\Desktop\Projects\Finshark\api\bin\Debug\net8.0\DotNetEnv.dll
+C:\Users\yeabiseraT\Desktop\Projects\Finshark\api\bin\Debug\net8.0\Sprache.dll
