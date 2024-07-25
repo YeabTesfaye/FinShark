@@ -59,7 +59,7 @@ public class PortfolioController : ControllerBase
         var appUser = await _userManager.FindByNameAsync(username);
 
         var userPortfolio = await _protfolioRepo.GetUserPortfolio(appUser);
-
+        
         var filteredStock = userPortfolio.Where(s => s.Symbol.ToLower() == symbol.ToLower()).ToList();
 
         if(filteredStock.Count == 1){

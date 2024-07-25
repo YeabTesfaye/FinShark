@@ -50,6 +50,7 @@ public async Task<IActionResult> GetStockById([FromRoute] int id){
         return CreatedAtAction(nameof(GetStockById), new { id = stockModel.StockId }, stockModel);
   }
   [HttpPut("{id}")]
+  [Authorize]
   public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockRequestDto updateDto){
         if(!ModelState.IsValid){
             return BadRequest(ModelState);
@@ -62,6 +63,7 @@ public async Task<IActionResult> GetStockById([FromRoute] int id){
         return Ok(stockModel.ToStockDto());
     }
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> Delete([FromRoute] int id){
         var stockModel = await _stockRepo.DeleteAsync(id);
       if(stockModel is null){

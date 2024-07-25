@@ -81,7 +81,7 @@ public class StockRepository : IStockRepository
         if(stock is null){
             return null;
         }
-         stock.MarketCap = stockDto.MarketCap;
+        stock.MarketCap = stockDto.MarketCap;
         stock.CompanyName = stockDto.CompanyName;
         stock.Industry = stockDto.Industry;
         stock.LastDiv = stockDto.LastDiv;
