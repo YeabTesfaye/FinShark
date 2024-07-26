@@ -14,10 +14,12 @@ public class PortfolioController : ControllerBase
     private readonly UserManager<AppUser> _userManager;
     private readonly IPortfolioRepository _protfolioRepo;
     private readonly IStockRepository _stockRepo;
-    public PortfolioController(UserManager<AppUser> userManager, IStockRepository stockrepo, IPortfolioRepository protfolioRepo){
+    private readonly IFMService _fmService;
+    public PortfolioController(UserManager<AppUser> userManager, IStockRepository stockrepo, IPortfolioRepository protfolioRepo, IFMService fMService){
         _stockRepo = stockrepo;
         _userManager = userManager;
         _protfolioRepo = protfolioRepo;
+        _fmService = fMService;
     }
         [HttpGet]
         [Authorize]
@@ -35,7 +37,16 @@ public class PortfolioController : ControllerBase
         var username = User.GetUsername();
         var appUser = await _userManager.FindByNameAsync(username);
         var stock = await _stockRepo.GetBySymbolAsync(symbol);
-        if (stock is null) return BadRequest("Stock Not Found");
+        if(stock is null){
+            stock = await _fmService.FindStockBySymbolAsync(symbol);
+            if(stock is null){
+                 return BadRequest("Stock Not Found");
+            }
+            // else{
+            //     await _stockRepo.CreateAsync(stock);
+            // }
+        }
+     
         var userPortfolio = await _protfolioRepo.GetUserPortfolio(appUser);
         if(userPortfolio.Any(e => e.Symbol.ToLower() == symbol.ToLower())) {
             return BadRequest("Can not add same stock to portfolio");
