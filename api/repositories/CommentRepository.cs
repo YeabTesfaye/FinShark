@@ -1,5 +1,6 @@
 using api.Data;
 using api.Dtos.Comment;
+using api.helper;
 using api.Interfaces;
 using api.models;
 using Azure;
@@ -33,9 +34,17 @@ public class CommentRepository : ICommentRepository
         return commnet;
     }
 
-    public async Task<List<Comment>> GetAllAsync()
+    public async Task<List<Comment>> GetAllAsync(CommentQueryObject queryObject)
     {
-        return await _context.Comments.Include(a => a.AppUser).ToListAsync();
+        var comments =  _context.Comments.Include(a => a.AppUser).AsQueryable();
+        if(!string.IsNullOrWhiteSpace(queryObject.Symbol)){
+            comments = comments.Where(s => s.Stock.Symbol == queryObject.Symbol);
+        }
+        if(queryObject.IsDecsending == true){
+            comments = comments.OrderByDescending(c => c.CreatedOn);
+        }
+
+        return await comments.ToListAsync();
     }
 
     public async Task<Comment?> GetByIdAsync(int id)

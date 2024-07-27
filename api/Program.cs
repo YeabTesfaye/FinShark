@@ -109,6 +109,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors(x => x.AllowAnyMethod()
+.AllowAnyHeader()
+//.WithOrigins("http://localhost:5237")
+.AllowCredentials()
+.SetIsOriginAllowed(orgin => true));
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
