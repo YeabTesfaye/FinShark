@@ -1,0 +1,6 @@
+# .env
+
+ConnectionStrings__DefaultConnection = your database connection
+JWT__Issuer=your jwt issuer 
+JWT__Audience=your jwt audience 
+JWT__SigninKey=your jwt sign in key 

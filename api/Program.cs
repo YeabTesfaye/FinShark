@@ -51,11 +51,13 @@ builder.Services.AddAuthentication(opions =>
         ValidateIssuer = true,
         ValidIssuer = builder.Configuration["JWT:Issuer"],
         ValidateAudience = true,
+        ValidateLifetime = true,
         ValidAudience = builder.Configuration["JWT:Audience"],
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
             System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigninKey"])
-        )
+        ),
+        ClockSkew  = TimeSpan.Zero
     };
 }
 );
