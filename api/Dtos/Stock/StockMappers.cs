@@ -32,17 +32,5 @@ public static class StockMappers
             MarketCap = stockDto.MarketCap
         };
     }
-
-     public static api.models.Stock ToStockFromFMP(this FMPStock fMPStock){
-        return new api.models.Stock
-        {
-            Symbol = fMPStock.symbol,
-            CompanyName = fMPStock.companyName,
-            Purchase = (decimal) fMPStock.price,
-            LastDiv = (decimal) fMPStock.lastDiv,
-            Industry = fMPStock.industry,
-            MarketCap = fMPStock.mktCap
-        };
-    }
     
 }

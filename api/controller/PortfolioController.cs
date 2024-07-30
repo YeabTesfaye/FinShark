@@ -14,12 +14,11 @@ public class PortfolioController : ControllerBase
     private readonly UserManager<AppUser> _userManager;
     private readonly IPortfolioRepository _protfolioRepo;
     private readonly IStockRepository _stockRepo;
-    private readonly IFMService _fmService;
-    public PortfolioController(UserManager<AppUser> userManager, IStockRepository stockrepo, IPortfolioRepository protfolioRepo, IFMService fMService){
+    
+    public PortfolioController(UserManager<AppUser> userManager, IStockRepository stockrepo, IPortfolioRepository protfolioRepo){
         _stockRepo = stockrepo;
         _userManager = userManager;
         _protfolioRepo = protfolioRepo;
-        _fmService = fMService;
     }
         [HttpGet]
         [Authorize]
@@ -38,13 +37,7 @@ public class PortfolioController : ControllerBase
         var appUser = await _userManager.FindByNameAsync(username);
         var stock = await _stockRepo.GetBySymbolAsync(symbol);
         if(stock is null){
-            stock = await _fmService.FindStockBySymbolAsync(symbol);
-            if(stock is null){
-                 return BadRequest("Stock Not Found");
-            }
-            // else{
-            //     await _stockRepo.CreateAsync(stock);
-            // }
+            return BadRequest("Stock Not Found");
         }
      
         var userPortfolio = await _protfolioRepo.GetUserPortfolio(appUser);

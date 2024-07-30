@@ -98,8 +98,7 @@ builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
-builder.Services.AddScoped<IFMService, FMPService>();
-builder.Services.AddHttpClient<IFMService, FMPService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

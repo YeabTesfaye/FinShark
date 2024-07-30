@@ -140,7 +140,6 @@ Start the application using dotnet run and navigate to https://localhost:5001/sw
   Removes a stock from the user's portfolio.
 
 
-
 ## Authentication
 
 This API uses JWT (JSON Web Tokens) for authentication. Include the token in the `Authorization` header with the `Bearer` scheme for protected endpoints.
@@ -149,3 +148,11 @@ This API uses JWT (JSON Web Tokens) for authentication. Include the token in the
 
 ```http
 Authorization: Bearer your_jwt_token
+
+## Swagger UI
+
+Below is a screenshot of the Swagger UI for the finShark Web API:
+
+![Swagger UI]("./api/img/img.png")
+
+<img src="./api/img/img.png">
