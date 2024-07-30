@@ -153,7 +153,8 @@ Authorization: Bearer your_jwt_token
 
 Below is a screenshot of the Swagger UI for the finShark Web API:
 
-![Swagger UI](./api/img/img.png)
+![Swagger UI](api/img/img.png)
+
 
 <img src="./api/img/img.png" alt="Swagger UI">
 
