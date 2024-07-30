@@ -158,3 +158,6 @@ Below is a screenshot of the Swagger UI for the finShark Web API:
 
 <img src="./api/img/img.png" alt="Swagger UI">
 
+![Screenshot 2024-07-30 115221](https://github.com/user-attachments/assets/6f272bc8-9eec-4779-b641-08d6ef28ff45)
+![Screenshot 2024-07-30 115221](https://github.com/user-attachments/assets/e999f6f8-9090-4132-a8f4-913f3ca2e55b)
+![Screenshot 2024-07-30 115203](https://github.com/user-attachments/assets/5035f7e0-1c37-4808-8449-829a68c62e38)
